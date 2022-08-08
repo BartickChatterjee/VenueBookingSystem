@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping
 @Slf4j
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="http://localhost:3000")
 public class PaymentRequestController {
 
 	@Autowired
@@ -103,18 +103,18 @@ public class PaymentRequestController {
 		}
 	}
 
-	@DeleteMapping("/deletePaymentByRequestId/{dealerId}/{requestId}")
-	public ResponseEntity<?> deletePaymentByRequestId(@RequestHeader String jwt, @PathVariable int dealerId,
+	@DeleteMapping("/deletePaymentByRequestId/{customerId}/{requestId}")
+	public ResponseEntity<?> deletePaymentByRequestId(@RequestHeader String jwt, @PathVariable int customerId,
 			@PathVariable int requestId) {
-		Dealer dealer = dealerFeignService.getDealerByJwt(jwt);
-		if (dealer.getDealerId() == dealerId) {
+		Customer customer = customerFeignService.getCustomerByJwt(jwt);
+		if (customer.getCustomerId() == customerId) {
 			log.info("Inside deletePaymentByRequestId");
 			PaymentRequest paymentRequest = paymentRequestService.getPaymentRequestByRequestId(requestId);
 			Booking booking = bookingService.getBookingByBookingId(paymentRequest.getBookingId());
 			bookingService.deleteBooking(booking.getBookingId());
 			return new ResponseEntity<Integer>(paymentRequestService.deletePaymentRequest(requestId), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<String>("Wrong Dealer", HttpStatus.FORBIDDEN);
+			return new ResponseEntity<String>("Wrong Customer", HttpStatus.FORBIDDEN);
 		}
 	}
 }

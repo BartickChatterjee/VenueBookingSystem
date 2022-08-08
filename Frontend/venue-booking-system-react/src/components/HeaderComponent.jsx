@@ -24,7 +24,7 @@ export const HeaderComponent = () => {
       navigate("/searchVenue")
     }
     else if (headerC.state.userType === "admin"){
-      navigate("/viewUsers")
+      navigate("/viewUser")
     }
   }
 
@@ -88,7 +88,7 @@ export const HeaderComponent = () => {
               <li className="nav-item active" style={{ display: headerC.state.logoutDisplayAttribute }}>
                 <span className="header-item" onClick={goToUpdateProfile}>{userC.state.firstName}</span>
               </li>
-              <li className="nav-item active" style={{ display: headerC.state.logoutDisplayAttribute }}>
+              <li className="nav-item active" style={{ display: headerC.state.userType != "admin"? headerC.state.logoutDisplayAttribute : "none" }}>
                 <span className="header-item" onClick={refreshBalance}>Balance: {userC.state.balance}</span>
               </li>
               <li className="nav-item active" style={{ display: headerC.state.logoutDisplayAttribute }}>

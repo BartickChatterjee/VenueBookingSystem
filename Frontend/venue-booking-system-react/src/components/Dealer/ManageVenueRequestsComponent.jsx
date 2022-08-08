@@ -14,54 +14,6 @@ function ManageVenueRequestsComponent() {
   const [bookingData,setBooking] = useState([])
   const [requestData,setRequest] = useState([])
 
-  // var bookingData = [
-  //   // {
-  //   //   "bookingId": 1,
-  //   //   "bookedFrom": "2022-08-01",
-  //   //   "bookedTo": "2022-08-05",
-  //   //   "bookingStatus": "Booked",
-  //   //   "customerName": "CustomerName##"
-  //   // },
-  //   // {
-  //   //   "bookingId": 2,
-  //   //   "bookedFrom": "2022-08-06",
-  //   //   "bookedTo": "2022-08-09",
-  //   //   "bookingStatus": "Booked",
-  //   //   "customerName": "CustomerName##"
-  //   // },
-  //   // {
-  //   //   "bookingId": 3,
-  //   //   "bookedFrom": "2022-08-14",
-  //   //   "bookedTo": "2022-08-17",
-  //   //   "bookingStatus": "Booked",
-  //   //   "customerName": "CustomerName##"
-  //   // }
-  // ]
-
-  // var requestData = [
-  //   // {
-  //   //   "bookingId": 1,
-  //   //   "bookedFrom": "2022-08-01",
-  //   //   "bookedTo": "2022-08-05",
-  //   //   "bookingStatus": "Raised",
-  //   //   "customerName": "CustomerName##"
-  //   // },
-  //   // {
-  //   //   "bookingId": 2,
-  //   //   "bookedFrom": "2022-08-06",
-  //   //   "bookedTo": "2022-08-09",
-  //   //   "bookingStatus": "Accepted",
-  //   //   "customerName": "CustomerName##"
-  //   // },
-  //   // {
-  //   //   "bookingId": 3,
-  //   //   "bookedFrom": "2022-08-14",
-  //   //   "bookedTo": "2022-08-17",
-  //   //   "bookingStatus": "Raised",
-  //   //   "customerName": "CustomerName##"
-  //   // }
-  // ]
-
   const [tableData, updateTableData] = useState(requestData)
   const [tableState, updateTableState] = useState("Requested")
 

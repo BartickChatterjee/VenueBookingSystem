@@ -26,10 +26,10 @@ import com.vrs.service.JwtUtilService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @Slf4j
 @RequestMapping
+@CrossOrigin("http://localhost:3000")
 public class DealerController {
 
 	@Autowired
@@ -125,7 +125,7 @@ public class DealerController {
 		
 		dealer.forEach(item -> {
 				item.setBalance(1000);
-				dealerService.updateDealer(item);
+				dealerService.addDealer(item);
 		});
 
 		return ResponseEntity.ok(dealer);

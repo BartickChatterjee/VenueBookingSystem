@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vrs.customer_microservice.controller.CustomerController;
 import com.vrs.customer_microservice.model.AuthenticationRequest;
-import com.vrs.customer_microservice.model.AuthenticationResponse;
 import com.vrs.customer_microservice.model.Customer;
 import com.vrs.customer_microservice.service.CustomerService;
 import com.vrs.customer_microservice.service.JwtUtilService;
@@ -119,7 +116,7 @@ public class CustomerController {
 		
 		customer.forEach(item -> {
 				item.setBalance(1000);
-				customerService.updateCustomer(item);
+				customerService.addCustomer(item);
 		});
 
 		return ResponseEntity.ok(customer);

@@ -1,46 +1,70 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import headerContext from "../../contexts/headerContext";
+import userContext from "../../contexts/userContext";
+import AdminService from "../../Services/AdminService";
 
 export const AdminLoginComponent = () => {
-  const navigate = useNavigate(headerContext);
+  const headerC = useContext(headerContext)
+  const userC = useContext(userContext)
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  useEffect(()=>{
+    headerC.updateDisplayAttribute("block")
+  },[])
+
   function goToManageVenueReq() {
     navigate("/manageVenueRequests");
   }
+
+  async function startAdminLogin(event) {
+    event.preventDefault()
+
+    const credentials = {
+      "username": document.getElementById("admin-login-username").value,
+      "password": document.getElementById("admin-login-password").value
+    }
+
+    var response = await AdminService.getToken(credentials)
+
+    if (response !== ""){
+      userC.updateUser(
+        -1,
+        "admin",
+        "none",
+        "none",
+        "none",
+        "none",
+        0
+      )
+      headerC.updateUserType("admin")
+      headerC.updateLogin("block")
+      navigate("/viewUser")
+    }
+    else{
+      alert("Bad Credentials")
+    }
+  }
+
   return (
     <>
       <div className="app-background">
-        <form>
+        <form onSubmit={startAdminLogin}>
           <div className="inner-box">
-            <span className="login-span-header">Admin Login</span>
+            <span className="dealer-login-span-header">Admin Login</span>
             <div>
-              <span className="login-span-input">Username</span>
-              <input
-                type="text"
-                className="login-input-field"
-                placeholder="Enter username"
-              ></input>
+              <span className="dealer-login-span-input">Username</span>
+              <input type="text" className="dealer-login-input-field" id="admin-login-username" placeholder='Enter username' required></input>
             </div>
             <div>
-              <span className="login-span-input">Password</span>
-              <input
-                type="password"
-                className="login-input-field"
-                placeholder="Enter password"
-              ></input>
+              <span className="dealer-login-span-input">Password</span>
+              <input type="password" className="dealer-login-input-field" id="admin-login-password" placeholder='Enter password' required></input>
             </div>
-            <div className="login-input">
-              <button
-                className="btn btn-outline-light btn-lg login-button"
-                onClick={goToManageVenueReq}
-              >
-                Login
-              </button>
-            </div>
+            <button className='btn btn-outline-light btn-lg dealer-login-button'>Login</button>
           </div>
         </form>
       </div>
-      {/* <div>Admin Login Component</div> */}
     </>
   );
 };

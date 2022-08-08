@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import BookVenueComponent from "./components/Customer/BookVenueComponent";
@@ -21,6 +21,7 @@ import ConfirmPaymentComponent from "./components/Customer/ConfirmPaymentCompone
 import UserState from "./contexts/UserState";
 import { VenueRegistrationComponent } from "./components/Venue/VenueRegistrationComponent";
 import { UpdateCustomerComponent } from "./components/Customer/UpdateCustomerComponent";
+import headerContext from "./contexts/headerContext";
 
 
 function App() {

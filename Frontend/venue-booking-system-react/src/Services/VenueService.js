@@ -11,6 +11,7 @@ const deleteBooking = "http://localhost:9003/venue/deleteBookingByBookingId"
 const savePaymentRequest = "http://localhost:9003/venue/savePaymentRequest"
 const getPaymentRequestByBookingStatus = "http://localhost:9003/venue/getPaymentRequestByBookingStatus"
 const savePaymentResponse = "http://localhost:9003/venue/savePaymentResponse"
+const deletePaymentRequest = "http://localhost:9003/venue/deletePaymentByRequestId"
 
 class VenueService {
     //For venue authorization
@@ -206,6 +207,26 @@ class VenueService {
             paymentResponse = ""
         } finally {
             return paymentResponse;
+        }
+    }
+
+    // for deleting a payment request
+    async deletePaymentRequest(token,customerId,requestId) {
+        console.log("deletePOST  -->  ",deleteVenue);
+        try {
+            var venue = await axios.delete(deletePaymentRequest+"/"+customerId+"/"+requestId, {
+                headers: {
+                    'jwt': `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    console.log("delete booking POST response --> ", response);
+                    return response;
+                });
+        } catch (error) {
+            venue = ""
+        } finally {
+            return venue;
         }
     }
 }

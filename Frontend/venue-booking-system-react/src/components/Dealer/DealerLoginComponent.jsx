@@ -77,7 +77,6 @@ export const DealerLoginComponent = () => {
           </div>
         </form>
       </div>
-      {/* <div>Dealer Login Component</div> */}
     </>
   )
 }

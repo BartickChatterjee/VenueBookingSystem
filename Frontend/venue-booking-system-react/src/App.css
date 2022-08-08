@@ -834,6 +834,7 @@ input[type="checkbox"] {
 /*---------------- Custom responsive table --------------*/
 
 .fl-table {
+  box-sizing: border-box;
   font-size: 16px;
   font-weight: normal;
   border: none;
@@ -860,7 +861,6 @@ input[type="checkbox"] {
 } */
 
 .fl-table tr {
-  box-sizing: border-box;
   border: 0vw solid white;
 }
 

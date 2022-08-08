@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping
 @Slf4j
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="http://localhost:3000")
 public class PaymentResponseController {
 
 	@Autowired

@@ -48,7 +48,19 @@ function ConfirmPaymentComponent() {
       navigate("/searchVenue")
     }
     else {
-      alert("Payment Failed")
+      alert("Insufficient Funds! Payment Failed")
+    }
+  }
+
+  async function declinePaymentRequest(){
+    var response = VenueService.deletePaymentRequest(headerC.state.jwtToken, userC.state.userId, location.state.requestId)
+
+    if (response != "") {
+      alert("Payment Request Declined")
+      navigate("/searchVenue")
+    }
+    else {
+      alert("Decline Failed")
     }
   }
 
@@ -88,7 +100,10 @@ function ConfirmPaymentComponent() {
                 </div>
               </div>
             </div>
-            <button className='btn btn-outline-light btn-lg dealer-login-button'>Confirm &amp; Pay</button>
+            <div className="dealer-registration-input-row">
+              <button className='btn btn-outline-light btn-lg dealer-login-button'>Confirm &amp; Pay</button>
+              <button type="button" className='btn btn-outline-light btn-lg dealer-login-button' onClick={declinePaymentRequest}>Decline</button>
+            </div>
           </div>
         </form>
       </div>

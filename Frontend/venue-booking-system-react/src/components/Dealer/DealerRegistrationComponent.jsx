@@ -59,11 +59,11 @@ export const DealerRegistrationComponent = () => {
                         <div className='dealer-registration-input-row'>
                             <div>
                                 <span className="dealer-login-span-input">Username</span>
-                                <input type="text" id="dealer-registration-username" className="dealer-login-input-field" placeholder='Enter username' required></input>
+                                <input type="text" id="dealer-registration-username" className="dealer-login-input-field" placeholder='Enter username' pattern=".{5,}" title="Username should contain at least 5 characters" required></input>
                             </div>
                             <div>
                                 <span className="dealer-login-span-input">Password</span>
-                                <input type="password" id="dealer-registration-password" className="dealer-login-input-field" placeholder='Enter password' required></input>
+                                <input type="password" id="dealer-registration-password" className="dealer-login-input-field" placeholder='Enter password' pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{5,}$" title="Password must contain at least: 1 upper case alphabet, 1 lower case alphabet, 1 number between 0-9, 1 special character from [!,@,#,$,%,^,&,*,_,=,+,-]" required></input>
                             </div>
                             <div>
                                 <span className="dealer-login-span-input">Confirm password</span>
