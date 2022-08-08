@@ -23,9 +23,13 @@ public class DealerServiceImpl implements DealerService{
 	
 	@Override
 	public Dealer updateDealer(Dealer dealer) {
-		if ( dealer.getPassword().equals( getDealerByUsername( dealer.getUsername() ).getPassword() ) )
-		dealer.setPassword(new BCryptPasswordEncoder(10).encode(dealer.getPassword()));
-		dealerRepository.save(dealer);
+		if ( dealer.getPassword().equals( getDealerByUsername( dealer.getUsername() ).getPassword() ) ) {
+			dealerRepository.save(dealer);
+		}
+		else {
+			dealer.setPassword(new BCryptPasswordEncoder(10).encode(dealer.getPassword()));
+			dealerRepository.save(dealer);
+		}
 		return dealer;
 	}
 	

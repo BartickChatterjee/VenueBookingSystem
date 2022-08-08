@@ -12,7 +12,7 @@ public interface VenueRepository extends JpaRepository<Venue, Integer> {
 	@Query("from Venue where venue_name = ?1")
 	Venue searchVenueByName(String venueName);
 	
-	@Query("from Venue where venue_location = ?1")
+	@Query("from Venue where lower(venue_location) = lower(?1)")
 	List<Venue> searchVenueByLocation(String venueLocation);
 	
 	@Query("from Venue where dealer_id = ?1")

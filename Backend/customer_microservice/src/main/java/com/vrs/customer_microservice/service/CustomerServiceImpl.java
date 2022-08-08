@@ -24,9 +24,13 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer updateCustomer(Customer customer) {
-		if ( customer.getPassword().equals( getCustomerByUsername( customer.getUsername() ).getPassword() ) )
-		customer.setPassword(new BCryptPasswordEncoder(10).encode(customer.getPassword()));
-		customerRepository.save(customer);
+		if ( customer.getPassword().equals( getCustomerByUsername( customer.getUsername() ).getPassword() ) ) {
+			customerRepository.save(customer);
+		}
+		else {
+			customer.setPassword(new BCryptPasswordEncoder(10).encode(customer.getPassword()));
+			customerRepository.save(customer);
+		}
 		return customer;
 	}
 	
