@@ -1,5 +1,5 @@
 // US_07
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Design from "../../Design";
 import CustomTextField from "../../Supporting_Components/CustomTextField";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -13,6 +13,10 @@ function RequestPaymentComponent() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(()=>{
+    if (headerC.state.userType !== "dealer")
+    navigate("/dealerLogin")
+  },[])
 
   async function acceptBookingRequest(event) {
     event.preventDefault()
@@ -75,15 +79,15 @@ function RequestPaymentComponent() {
             <div className='dealer-registration-input-row'>
               <div>
                 <span className="dealer-login-span-input">Customer Name</span>
-                <input type="text" id="dealer-registration-firstname" className="dealer-login-input-field" value={location.state.booking.customerFirstName + " " + location.state.booking.customerLastName} readOnly></input>
+                <input type="text" id="dealer-registration-firstname" className="dealer-login-input-field" value={ location && location.state && location.state.booking && location.state.booking.customerFirstName + " " + location && location.state && location.state.booking && location.state.booking.customerLastName} readOnly></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">Requested from</span>
-                <input type="date" id="dealer-registration-dob" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} value={location.state.booking.bookedFrom} readOnly></input>
+                <input type="date" id="dealer-registration-dob" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} value={location && location.state && location.state.booking && location.state.booking.bookedFrom} readOnly></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">Requested to</span>
-                <input type="date" id="dealer-registration-dob" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} value={location.state.booking.bookedTo} readOnly></input>
+                <input type="date" id="dealer-registration-dob" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} value={location && location.state && location.state.booking && location.state.booking.bookedTo} readOnly></input>
               </div>
             </div>
             <div className='dealer-registration-input-row'>
@@ -96,14 +100,14 @@ function RequestPaymentComponent() {
                   Requested amenities
                 </span>
                 <div>
-                  <span className="venue-registration-input-checkbox-label" style={{ display: location.state.booking.banquet == true? "inline-block" : "None"}}>Banquet</span>
-                  <span className="venue-registration-input-checkbox-label" style={{ display: location.state.booking.dining == true? "inline-block" : "None"}}>Dining</span>
-                  <span className="venue-registration-input-checkbox-label" style={{ display: location.state.booking.parking == true? "inline-block" : "None"}}>Parking</span>
+                  <span className="venue-registration-input-checkbox-label" style={{ display: location && location.state && location.state.booking && location.state.booking.banquet == true? "inline-block" : "None"}}>Banquet</span>
+                  <span className="venue-registration-input-checkbox-label" style={{ display: location && location.state && location.state.booking && location.state.booking.dining == true? "inline-block" : "None"}}>Dining</span>
+                  <span className="venue-registration-input-checkbox-label" style={{ display: location && location.state && location.state.booking && location.state.booking.parking == true? "inline-block" : "None"}}>Parking</span>
                 </div>
               </div>
             </div>
             <div className="dealer-registration-input-row">
-              <button className='btn btn-outline-light btn-lg dealer-login-button' style={{ display: location.state.booking.bookingStatus == "Raised"? "inline-block" : "None"}}>Accept &amp; Request Payment</button>
+              <button className='btn btn-outline-light btn-lg dealer-login-button' style={{ display: location && location.state && location.state.booking && location.state.booking.bookingStatus == "Raised"? "inline-block" : "None"}}>Accept &amp; Request Payment</button>
               <button className='btn btn-outline-light btn-lg dealer-login-button' onClick={declineBookingRequest}>Decline</button>
             </div>
           </div>

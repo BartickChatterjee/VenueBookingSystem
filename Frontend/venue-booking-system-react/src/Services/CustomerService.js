@@ -12,7 +12,7 @@ class CustomerService {
         try {
             var token = await axios.post(customerAuthenticate, credentials)
                 .then(response => {
-                    console.log("POST response --> ", response);
+                    // console.log("POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -40,7 +40,7 @@ class CustomerService {
         try {
             var customer = await axios.post(addCustomer, customer)
                 .then(response => {
-                    console.log("register POST response --> ", response);
+                    // console.log("register POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -59,7 +59,7 @@ class CustomerService {
                 }
             })
                 .then(response => {
-                    console.log("update POST response --> ", response);
+                    // console.log("update POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -71,7 +71,7 @@ class CustomerService {
 
     // for customer delete
     async deleteCustomer(username,token) {
-        console.log("deletePOST  -->  ",deleteCustomer);
+        // console.log("deletePOST  -->  ",deleteCustomer);
         try {
             var customer = await axios.delete(deleteCustomer+username, {
                 headers: {
@@ -79,7 +79,7 @@ class CustomerService {
                 }
             })
                 .then(response => {
-                    console.log("delete POST response --> ", response);
+                    // console.log("delete POST response --> ", response);
                     return response;
                 });
         } catch (error) {

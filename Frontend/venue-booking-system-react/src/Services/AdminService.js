@@ -10,7 +10,7 @@ class AdminService {
         try {
             var token = await axios.post(adminAuthenticate, credentials)
                 .then(response => {
-                    console.log("POST response --> ", response);
+                    // console.log("POST response --> ", response);
                     return response;
                 });
         } catch (error) {

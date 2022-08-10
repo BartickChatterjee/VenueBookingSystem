@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import headerContext from '../contexts/headerContext';
 
@@ -7,14 +7,22 @@ export const LandingComponent = () => {
   const headerC = useContext(headerContext)
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if (headerC.state.userType === "admin")
+    navigate("/viewUser")
+    else if (headerC.state.userType === "customer")
+    navigate("/searchVenue")
+    else if (headerC.state.userType === "dealer")
+    navigate("/viewVenueStatus")
+    headerC.updateDisplayAttribute("none")
+  },[])
+
   function goToDealerLogin() {
-    headerC.updateDisplayAttribute("block")
     navigate("/dealerLogin")
     // alert(headerC.state.userType)
   }
 
   function goToCustomerLogin() {
-    headerC.updateDisplayAttribute("block")
     navigate("/customerLogin")
 
     // alert(headerC.state.userType)

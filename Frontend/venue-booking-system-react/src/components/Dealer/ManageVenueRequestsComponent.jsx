@@ -29,8 +29,11 @@ function ManageVenueRequestsComponent() {
   ) : <tr style={{ height: "50vh" }}><td colSpan={5}>No Requests Found</td></tr>
 
   useEffect(()=>{
+    if (headerC.state.userType !== "dealer")
+    navigate("/dealerLogin")
+
     loadBookings().then((res) => {
-      console.log("res in manage venue     ",res);
+      // console.log("res in manage venue     ",res);
 
       var bd = []
       var rd = []
@@ -60,18 +63,18 @@ function ManageVenueRequestsComponent() {
   },[requestData])
 
   const loadBookings = async () => {
-    var response = await VenueService.getBookingByVenueId(headerC.state.jwtToken, userC.state.userId ,location.state.venueId)
+    var response = await VenueService.getBookingByVenueId(headerC.state.jwtToken, userC.state.userId, location && location.state && location.state.venueId)
     // console.log(response.data)
     return response.data
   }
 
   function goToUpdateVenue() {
-    console.log("Venue to be updated   ",location.state);
+    // console.log("Venue to be updated   ",location.state);
     navigate("/updateVenue",{ state: location.state })
   }
 
   function goToRequestPayment(res) {
-    console.log("Going to request payment     ",tableData[res-1]);
+    // console.log("Going to request payment     ",tableData[res-1]);
 
     if (tableData[res-1].bookingStatus == "Booked")
     alert("This request has already been paid by the customer")
@@ -103,8 +106,8 @@ function ManageVenueRequestsComponent() {
         <div className="top-down-inner-box">
           <div className="above-content-input-row">
             <div>
-              <span className="dealer-login-span-header">{ location.state.venueName }</span>
-              <span className="venue-registration-input-checkbox-label" style={{ marginLeft: "2vw" }}>{ location.state.venueLocation }</span>
+              <span className="dealer-login-span-header">{ location && location.state && location.state.venueName }</span>
+              <span className="venue-registration-input-checkbox-label" style={{ marginLeft: "2vw" }}>{ location && location.state && location.state.venueLocation }</span>
             </div>
             <div style={{ display: "flex", gap: "1vw"}}>
               <button id="toggle-table-button" className='btn btn-outline-light btn-lg dealer-login-button' onClick={toggleTable}>See Bookings</button>

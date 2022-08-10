@@ -1,5 +1,5 @@
 // US_13
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import headerContext from "../../contexts/headerContext";
 import userContext from "../../contexts/userContext";
@@ -12,6 +12,11 @@ function ConfirmPaymentComponent() {
   const headerC = useContext(headerContext)
   const userC = useContext(userContext)
   const location = useLocation()
+
+  useEffect(()=>{
+    if (headerC.state.userType !== "customer")
+    navigate("/customerLogin")
+  },[])
 
   async function confirmPayment(event) {
     event.preventDefault()
@@ -37,11 +42,11 @@ function ConfirmPaymentComponent() {
       "customerLastName": userC.state.lastName
     }
 
-    console.log("new request payment in req pay     ",newPaymentResponse);
+    // console.log("new request payment in req pay     ",newPaymentResponse);
 
     var response = await VenueService.savePaymentResponse(headerC.state.jwtToken, userC.state.userId, newPaymentResponse)
 
-    console.log("Response in req pay     ",response);
+    // console.log("Response in req pay     ",response);
 
     if (response != "") {
       alert("Venue booked Successfully!")
@@ -73,30 +78,30 @@ function ConfirmPaymentComponent() {
             <div className='dealer-registration-input-row'>
               <div>
                 <span className="dealer-login-span-input">Venue Name</span>
-                <input type="text" id="dealer-registration-firstname" className="dealer-login-input-field" value={location.state.venueName} readOnly></input>
+                <input type="text" id="dealer-registration-firstname" className="dealer-login-input-field" value={location && location.state && location.state.venueName} readOnly></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">Requested from</span>
-                <input type="date" id="dealer-registration-dob" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} value={location.state.bookedFrom} readOnly></input>
+                <input type="date" id="dealer-registration-dob" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} value={location && location.state && location.state.bookedFrom} readOnly></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">Requested to</span>
-                <input type="date" id="dealer-registration-dob" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} value={location.state.bookedTo} readOnly></input>
+                <input type="date" id="dealer-registration-dob" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} value={location && location.state && location.state.bookedTo} readOnly></input>
               </div>
             </div>
             <div className='dealer-registration-input-row'>
               <div>
                 <span className="dealer-login-span-input">Amount</span>
-                <input type="number" id="dealer-registration-lastname" className="dealer-login-input-field" placeholder='Enter last name' value={location.state.requestedAmount} readOnly></input>
+                <input type="number" id="dealer-registration-lastname" className="dealer-login-input-field" placeholder='Enter last name' value={location && location.state && location.state.requestedAmount} readOnly></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">
                   Requested amenities
                 </span>
                 <div>
-                <span className="venue-registration-input-checkbox-label" style={{ display: location.state.banquet == true? "inline-block" : "None"}}>Banquet</span>
-                  <span className="venue-registration-input-checkbox-label" style={{ display: location.state.dining == true? "inline-block" : "None"}}>Dining</span>
-                  <span className="venue-registration-input-checkbox-label" style={{ display: location.state.parking == true? "inline-block" : "None"}}>Parking</span>
+                <span className="venue-registration-input-checkbox-label" style={{ display: location && location.state && location.state.banquet == true? "inline-block" : "None"}}>Banquet</span>
+                  <span className="venue-registration-input-checkbox-label" style={{ display: location && location.state && location.state.dining == true? "inline-block" : "None"}}>Dining</span>
+                  <span className="venue-registration-input-checkbox-label" style={{ display: location && location.state && location.state.parking == true? "inline-block" : "None"}}>Parking</span>
                 </div>
               </div>
             </div>

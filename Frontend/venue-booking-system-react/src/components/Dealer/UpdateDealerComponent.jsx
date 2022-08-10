@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import headerContext from "../../contexts/headerContext";
 import userContext from "../../contexts/userContext";
@@ -9,6 +9,11 @@ export const UpdateDealerComponent = () => {
   const userC = useContext(userContext)
   const headerC = useContext(headerContext)
   const navigate = useNavigate()
+
+  useEffect(()=>{
+    if (headerC.state.userType !== "dealer")
+    navigate("/dealerLogin")
+  },[])
 
   async function startUpdate(event) {
     event.preventDefault()
@@ -23,7 +28,7 @@ export const UpdateDealerComponent = () => {
       "password": userC.state.password
     }
 
-    console.log("start update dealer --> ", newDealer);
+    // console.log("start update dealer --> ", newDealer);
 
     if (newDealer.password != document.getElementById("dealer-update-password").value) {
       alert("Wrong Password!")
@@ -32,7 +37,7 @@ export const UpdateDealerComponent = () => {
     }
 
     var response = await DealerService.updateDealer(newDealer, headerC.state.jwtToken)
-    console.log("update response --> ", response);
+    // console.log("update response --> ", response);
 
     if (response != "") {
       alert("Account updated successfully")
@@ -64,7 +69,7 @@ export const UpdateDealerComponent = () => {
     }
 
     var response = await DealerService.deleteDealer(username, headerC.state.jwtToken)
-    console.log("update response --> ", response);
+    // console.log("update response --> ", response);
 
     if (response != "") {
       alert("Account deleted successfully")
@@ -84,7 +89,7 @@ export const UpdateDealerComponent = () => {
       <div className="app-background">
         <form onSubmit={startUpdate}>
           <div className="inner-box">
-            <span className="dealer-update-span-header">Edit Profile</span>
+            <span className="dealer-login-span-header">Edit Profile</span>
 
             <div className='dealer-registration-input-row'>
               <div className="reg-form">
@@ -92,7 +97,7 @@ export const UpdateDealerComponent = () => {
                 <input
                   type="text"
                   id="dealer-update-firstname"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Enter firstname"
                   defaultValue={userC.state.firstName}
                 ></input>
@@ -102,7 +107,7 @@ export const UpdateDealerComponent = () => {
                 <input
                   type="text"
                   id="dealer-update-lastname"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Enter lastname"
                   defaultValue={userC.state.lastName}
                 ></input>
@@ -112,7 +117,7 @@ export const UpdateDealerComponent = () => {
                 <input
                   type="number"
                   id="dealer-update-balance"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Amount"
                   min="0"
                   defaultValue={userC.state.balance}
@@ -126,7 +131,7 @@ export const UpdateDealerComponent = () => {
                 <input
                   type="date"
                   id="dealer-update-dob"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Enter DOB"
                   defaultValue={userC.state.dob}
                   style={{ paddingRight: "1vw" }}
@@ -138,7 +143,7 @@ export const UpdateDealerComponent = () => {
                 <input
                   type="password"
                   id="dealer-update-password"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Enter password"
                   style={{ paddingRight: "1vw" }}
                   required

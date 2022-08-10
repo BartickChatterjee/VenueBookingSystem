@@ -1,6 +1,6 @@
 // US-09
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../contexts/headerContext";
 import headerContext from "../../contexts/headerContext";
@@ -13,10 +13,15 @@ function BookVenueComponent(props) {
   const headerC = useContext(headerContext)
   const userC = useContext(userContext)
 
+  useEffect(()=>{
+    if (headerC.state.userType !== "customer")
+    navigate("/customerLogin")
+  },[])
+
   async function raiseBookingRequest(event) {
     event.preventDefault()
 
-    console.log("when raised     ", location.state);
+    // console.log("when raised     ", location.state);
 
     const newBookingRequest = {
       "bookedFrom": document.getElementById("book-venue-from").value,
@@ -35,10 +40,10 @@ function BookVenueComponent(props) {
       "dealerId": location.state.dealerId
     }
 
-    console.log("passing this     ", newBookingRequest);
+    // console.log("passing this     ", newBookingRequest);
 
     var response = await VenueService.saveBooking(headerC.state.jwtToken, newBookingRequest)
-    console.log("response is this     ", response.data);
+    // console.log("response is this     ", response.data);
 
     if (response != "") {
       alert("Request Submitted Successfully!")
@@ -58,7 +63,7 @@ function BookVenueComponent(props) {
             <div className='dealer-registration-input-row'>
               <div>
                 <span className="dealer-login-span-input">Venue Name</span>
-                <input type="text" className="dealer-login-input-field" placeholder='Enter first name' value={location.state.venueName} readOnly></input>
+                <input type="text" className="dealer-login-input-field" value={location && location.state && location.state.venueName} readOnly></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">Book from</span>
@@ -72,26 +77,26 @@ function BookVenueComponent(props) {
             <div className='dealer-registration-input-row'>
               <div>
                 <span className="dealer-login-span-input">Venue Location</span>
-                <input type="text" id="dealer-registration-lastname" className="dealer-login-input-field" placeholder='Enter last name' value={location.state.venueLocation} readOnly></input>
+                <input type="text" id="dealer-registration-lastname" className="dealer-login-input-field" value={location && location.state && location.state.venueLocation} readOnly></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">
                   Select amenities to avail
                 </span>
                 <div>
-                  <div className="venue-registration-input-checkbox" style={{ display: location.state.banquet == true? "inline-block" : "None"}}>
+                  <div className="venue-registration-input-checkbox" style={{ display: (location && location.state && location.state.banquet) == true? "inline-block" : "None"}}>
                     <input type="checkbox" id="book-venue-banquet" name="banquet" value="Banquet"></input>
                     <span className="venue-registration-input-checkbox-label">
                       Banquet
                     </span>
                   </div>
-                  <div className="venue-registration-input-checkbox" style={{ display: location.state.dining == true? "inline-block" : "None"}}>
+                  <div className="venue-registration-input-checkbox" style={{ display: (location && location.state && location.state.dining) == true? "inline-block" : "None"}}>
                     <input type="checkbox" id="book-venue-dining" name="dining" value="Dining"></input>
                     <span className="venue-registration-input-checkbox-label">
                       Dining
                     </span>
                   </div>
-                  <div className="venue-registration-input-checkbox" style={{ display: location.state.parking == true? "inline-block" : "None"}}>
+                  <div className="venue-registration-input-checkbox" style={{ display: (location && location.state && location.state.parking) == true? "inline-block" : "None"}}>
                     <input type="checkbox" id="book-venue-parking" value="Parking"></input>
                     <span className="venue-registration-input-checkbox-label">
                       Parking

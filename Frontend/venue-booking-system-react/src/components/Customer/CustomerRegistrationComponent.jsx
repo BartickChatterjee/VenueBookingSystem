@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import headerContext from '../../contexts/headerContext'
 import CustomerService from '../../Services/CustomerService'
 
 export const CustomerRegistrationComponent = () => {
 
     const navigate = useNavigate()
+    const headerC = useContext(headerContext)
+
+    useEffect(()=>{
+        headerC.updateDisplayAttribute("block")
+    },[])
 
     async function startCustomerRegistration(event){
         event.preventDefault()

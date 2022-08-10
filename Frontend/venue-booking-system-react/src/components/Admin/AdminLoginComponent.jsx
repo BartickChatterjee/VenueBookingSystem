@@ -11,6 +11,12 @@ export const AdminLoginComponent = () => {
   const location = useLocation();
   
   useEffect(()=>{
+    if (headerC.state.userType === "admin")
+    navigate("/viewUser")
+    else if (headerC.state.userType === "customer")
+    navigate("/searchVenue")
+    else if (headerC.state.userType === "dealer")
+    navigate("/viewVenueStatus")
     headerC.updateDisplayAttribute("block")
   },[])
 

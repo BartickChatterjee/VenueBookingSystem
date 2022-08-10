@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import headerContext from "../../contexts/headerContext";
 import userContext from "../../contexts/userContext";
@@ -9,6 +9,11 @@ function UpdateVenueComponent() {
   const headerC = useContext(headerContext)
   const userC = useContext(userContext)
   const location = useLocation()
+
+  useEffect(()=>{
+    if (headerC.state.userType !== "dealer")
+    navigate("/dealerLogin")
+  },[])
 
   async function startUpdate(event) {
     event.preventDefault()
@@ -26,7 +31,7 @@ function UpdateVenueComponent() {
       "dealerId": location.state.dealerId
     }
 
-    console.log("start update venue --> ", newVenue);
+    // console.log("start update venue --> ", newVenue);
 
     if (document.getElementById("update-venue-password").value != userC.state.password) {
       alert("Wrong Password!")
@@ -35,7 +40,7 @@ function UpdateVenueComponent() {
     }
 
     var response = await VenueService.updateVenue(headerC.state.jwtToken, newVenue)
-    console.log("update venue response --> ", response);
+    // console.log("update venue response --> ", response);
 
     if (response != "") {
       alert("Venue updated successfully")
@@ -78,7 +83,7 @@ function UpdateVenueComponent() {
                   className="dealer-login-input-field"
                   id="update-venue-name"
                   placeholder="Enter venue name"
-                  defaultValue={location.state.venueName}
+                  defaultValue={location && location.state && location.state.venueName}
                   required
                 ></input>
               </div>
@@ -89,7 +94,7 @@ function UpdateVenueComponent() {
                   className="dealer-login-input-field"
                   id="update-venue-location"
                   placeholder="Enter venue location"
-                  defaultValue={location.state.venueLocation}
+                  defaultValue={location && location.state && location.state.venueLocation}
                   required
                 ></input>
               </div>
@@ -100,7 +105,7 @@ function UpdateVenueComponent() {
                   className="dealer-login-input-field"
                   id="update-venue-capacity"
                   placeholder="Enter capacity in numbers"
-                  defaultValue={location.state.capacity}
+                  defaultValue={location && location.state && location.state.capacity}
                   required
                 ></input>
               </div>
@@ -113,19 +118,19 @@ function UpdateVenueComponent() {
                 {/* <input type="text" className="dealer-login-input-field" placeholder='Enter username' required></input> */}
                 <div>
                   <div className="venue-registration-input-checkbox">
-                    <input type="checkbox" name="banquet" id="update-venue-banquet" value="Banquet" defaultChecked={location.state.banquet}></input>
+                    <input type="checkbox" name="banquet" id="update-venue-banquet" value="Banquet" defaultChecked={location && location.state && location.state.banquet}></input>
                     <span className="venue-registration-input-checkbox-label">
                       Banquet
                     </span>
                   </div>
                   <div className="venue-registration-input-checkbox">
-                    <input type="checkbox" name="dining" id="update-venue-dining" value="Dining" defaultChecked={location.state.dining}></input>
+                    <input type="checkbox" name="dining" id="update-venue-dining" value="Dining" defaultChecked={location && location.state && location.state.dining}></input>
                     <span className="venue-registration-input-checkbox-label">
                       Dining
                     </span>
                   </div>
                   <div className="venue-registration-input-checkbox">
-                    <input type="checkbox" id="update-venue-parking" value="Parking"  defaultChecked={location.state.parking}></input>
+                    <input type="checkbox" id="update-venue-parking" value="Parking" defaultChecked={location && location.state && location.state.parking}></input>
                     <span className="venue-registration-input-checkbox-label">
                       Parking
                     </span>

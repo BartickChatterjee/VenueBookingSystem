@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import headerContext from "../../contexts/headerContext";
 import userContext from "../../contexts/userContext";
@@ -9,6 +9,11 @@ export const UpdateCustomerComponent = () => {
   const userC = useContext(userContext)
   const headerC = useContext(headerContext)
   const navigate = useNavigate()
+
+  useEffect(()=>{
+    if (headerC.state.userType !== "customer")
+    navigate("/customerLogin")
+  },[])
 
   async function startUpdate(event) {
     event.preventDefault()
@@ -23,7 +28,7 @@ export const UpdateCustomerComponent = () => {
       "password": userC.state.password
     }
 
-    console.log("start update customer --> ", newCustomer);
+    // console.log("start update customer --> ", newCustomer);
 
     if (newCustomer.password != document.getElementById("customer-update-password").value) {
       alert("Wrong Password!")
@@ -32,7 +37,7 @@ export const UpdateCustomerComponent = () => {
     }
 
     var response = await CustomerService.updateCustomer(newCustomer, headerC.state.jwtToken)
-    console.log("update response --> ", response);
+    // console.log("update response --> ", response);
 
     if (response != "") {
       alert("Account updated successfully")
@@ -92,7 +97,7 @@ export const UpdateCustomerComponent = () => {
                 <input
                   type="text"
                   id="customer-update-firstname"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Enter firstname"
                   defaultValue={userC.state.firstName}
                 ></input>
@@ -102,7 +107,7 @@ export const UpdateCustomerComponent = () => {
                 <input
                   type="text"
                   id="customer-update-lastname"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Enter lastname"
                   defaultValue={userC.state.lastName}
                 ></input>
@@ -112,7 +117,7 @@ export const UpdateCustomerComponent = () => {
                 <input
                   type="number"
                   id="customer-update-balance"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Amount"
                   min="0"
                   defaultValue={userC.state.balance}
@@ -126,7 +131,7 @@ export const UpdateCustomerComponent = () => {
                 <input
                   type="date"
                   id="customer-update-dob"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Enter DOB"
                   defaultValue={userC.state.dob}
                   style={{ paddingRight: "1vw" }}
@@ -138,7 +143,7 @@ export const UpdateCustomerComponent = () => {
                 <input
                   type="password"
                   id="customer-update-password"
-                  className="dealer-update-input-field"
+                  className="dealer-login-input-field"
                   placeholder="Enter password"
                   style={{ paddingRight: "1vw" }}
                   required

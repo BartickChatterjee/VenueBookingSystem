@@ -56,13 +56,16 @@ function ViewVenueStatusComponent() {
   ) : <tr style={{ height: "50vh" }}><td colSpan={3}>No Venues Found</td></tr>
 
   useEffect(()=>{
+    if (headerC.state.userType !== "dealer")
+    navigate("/dealerLogin")
+
     const loadVenues = async () => {
       var response = await VenueService.getVenues(headerC.state.jwtToken, userC.state.userId)
       // console.log(response.data)
       return response.data
     }
     loadVenues().then((res) => {
-      console.log("res ",res);
+      // console.log("res ",res);
       updateTableData(res)
     })
   },[])
@@ -72,7 +75,7 @@ function ViewVenueStatusComponent() {
   }
 
   function goToManageVenue(res) {
-    console.log("Venue that will be managed  ",tableData[res-1]);
+    // console.log("Venue that will be managed  ",tableData[res-1]);
     navigate("/manageVenueRequests",{ state: tableData[res-1] });
   }
 

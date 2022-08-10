@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import headerContext from '../../contexts/headerContext'
 import DealerService from '../../Services/DealerService'
 
 export const DealerRegistrationComponent = () => {
 
     const navigate = useNavigate()
+    const headerC = useContext(headerContext)
+
+    useEffect(()=>{
+        headerC.updateDisplayAttribute("block")
+    },[])
 
     async function startDealerRegistration(event){
         event.preventDefault()

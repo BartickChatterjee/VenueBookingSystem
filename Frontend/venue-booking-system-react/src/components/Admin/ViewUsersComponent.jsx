@@ -54,7 +54,7 @@ function ViewUsersComponent() {
       item.userId = item.dealerId
       delete item.dealerId
     })
-    console.log("Dealer's response       ",response.data)
+    // console.log("Dealer's response       ",response.data)
     return response.data
   }
 
@@ -64,7 +64,7 @@ function ViewUsersComponent() {
       item.userId = item.customerId
       delete item.customerId
     })
-    console.log("Customer's response       ",response.data)
+    // console.log("Customer's response       ",response.data)
     return response.data
   }
 

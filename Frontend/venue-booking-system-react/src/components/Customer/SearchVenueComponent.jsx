@@ -26,13 +26,16 @@ function SearchVenueComponent() {
   ) : <tr style={{ height: "50vh" }}><td colSpan={3}>No Venues Found</td></tr>
 
   useEffect(()=>{
+    if (headerC.state.userType !== "customer")
+    navigate("/customerLogin")
+
     loadRequests().then((res)=>{
       if (res != ""){
-        console.log("found acceped requests     ",res);
+        // console.log("found acceped requests     ",res);
         setPaymentRequest(res)
       }
-      else
-      console.log("acceped requests not found");
+      // else
+      // console.log("acceped requests not found");
     })
   },[])
 
@@ -62,9 +65,9 @@ function SearchVenueComponent() {
     // alert(location)
     // axios request to fetch venues based on location and store the response json array
     // inside tableData
-    console.log("Before feching  ", headerC.state.jwtToken, userC.state.userId, location);
+    // console.log("Before feching  ", headerC.state.jwtToken, userC.state.userId, location);
     loadVenues(headerC.state.jwtToken, userC.state.userId, location).then((res) => {
-      console.log("res ", res);
+      // console.log("res ", res);
       updateTableData(res)
     })
     // var response = [
@@ -103,7 +106,7 @@ function SearchVenueComponent() {
   }
 
   function goToConfirmPayment() {
-    console.log("sending this to confirm     ",paymentRequest);
+    // console.log("sending this to confirm     ",paymentRequest);
     navigate("/confirmPayment",{ state: paymentRequest })
   }
 

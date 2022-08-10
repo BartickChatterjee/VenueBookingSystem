@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import headerContext from '../../contexts/headerContext'
 import userContext from '../../contexts/userContext'
@@ -9,6 +9,16 @@ export const CustomerLoginComponent = () => {
   const navigate = useNavigate()
   const userC = useContext(userContext)
   const headerC = useContext(headerContext)
+
+  useEffect(()=>{
+    if (headerC.state.userType === "admin")
+    navigate("/viewUser")
+    else if (headerC.state.userType === "customer")
+    navigate("/searchVenue")
+    else if (headerC.state.userType === "dealer")
+    navigate("/viewVenueStatus")
+    headerC.updateDisplayAttribute("block")
+  },[])
 
   function goToCustomerRegistration() {
     navigate("/customerRegistration")
@@ -26,15 +36,13 @@ export const CustomerLoginComponent = () => {
 
    
     response = await CustomerService.getToken(credentials)
-    console.log("JWT token --> ", response);
+    // console.log("JWT token --> ", response);
     headerC.updateJwtToken(response.data)
 
     // console.log("header context jwtToken --> ", headerC.state.jwtToken);
     if (response != "") {
       customer = await CustomerService.getCustomerData(response.data)
       // console.log("customer --> ", customer.data);
-
-      console.log("Reached Here!!!");
 
       userC.updateUser(
         customer.data.customerId,

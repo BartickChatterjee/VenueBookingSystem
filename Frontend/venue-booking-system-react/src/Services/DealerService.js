@@ -12,7 +12,7 @@ class DealerService {
         try {
             var token = await axios.post(dealerAuthenticate, credentials)
                 .then(response => {
-                    console.log("POST response --> ", response);
+                    // console.log("POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -40,7 +40,7 @@ class DealerService {
         try {
             var dealer = await axios.post(addDealer, dealer)
                 .then(response => {
-                    console.log("register POST response --> ", response);
+                    // console.log("register POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -59,7 +59,7 @@ class DealerService {
                 }
             })
                 .then(response => {
-                    console.log("update POST response --> ", response);
+                    // console.log("update POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -71,7 +71,7 @@ class DealerService {
 
     // for dealer delete
     async deleteDealer(username,token) {
-        console.log("deletePOST  -->  ",deleteDealer);
+        // console.log("deletePOST  -->  ",deleteDealer);
         try {
             var dealer = await axios.delete(deleteDealer+username, {
                 headers: {
@@ -79,7 +79,7 @@ class DealerService {
                 }
             })
                 .then(response => {
-                    console.log("delete POST response --> ", response);
+                    // console.log("delete POST response --> ", response);
                     return response;
                 });
         } catch (error) {

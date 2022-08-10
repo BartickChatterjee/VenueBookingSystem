@@ -23,7 +23,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("update POST response --> ", response);
+                    // console.log("update POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -68,7 +68,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("update POST response --> ", response);
+                    // console.log("update POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -80,7 +80,7 @@ class VenueService {
 
     // for venue delete
     async deleteVenue(token,dealerId,venueId) {
-        console.log("deletePOST  -->  ",deleteVenue);
+        // console.log("deletePOST  -->  ",deleteVenue);
         try {
             var venue = await axios.delete(deleteVenue+"/"+dealerId+"/"+venueId, {
                 headers: {
@@ -88,7 +88,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("delete POST response --> ", response);
+                    // console.log("delete POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -120,7 +120,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("book venue POST response --> ", response);
+                    // console.log("book venue POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -132,7 +132,7 @@ class VenueService {
 
     // for deleting a booking request
     async deleteBooking(token,dealerId,requestId) {
-        console.log("deletePOST  -->  ",deleteVenue);
+        // console.log("deletePOST  -->  ",deleteVenue);
         try {
             var venue = await axios.delete(deleteBooking+"/"+dealerId+"/"+requestId, {
                 headers: {
@@ -140,7 +140,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("delete booking POST response --> ", response);
+                    // console.log("delete booking POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -160,7 +160,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("book venue POST response --> ", response);
+                    // console.log("book venue POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -180,7 +180,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("get payment POST response --> ", response);
+                    // console.log("get payment POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -200,7 +200,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("book venue POST response --> ", response);
+                    // console.log("book venue POST response --> ", response);
                     return response;
                 });
         } catch (error) {
@@ -212,7 +212,7 @@ class VenueService {
 
     // for deleting a payment request
     async deletePaymentRequest(token,customerId,requestId) {
-        console.log("deletePOST  -->  ",deleteVenue);
+        // console.log("deletePOST  -->  ",deleteVenue);
         try {
             var venue = await axios.delete(deletePaymentRequest+"/"+customerId+"/"+requestId, {
                 headers: {
@@ -220,7 +220,7 @@ class VenueService {
                 }
             })
                 .then(response => {
-                    console.log("delete booking POST response --> ", response);
+                    // console.log("delete booking POST response --> ", response);
                     return response;
                 });
         } catch (error) {

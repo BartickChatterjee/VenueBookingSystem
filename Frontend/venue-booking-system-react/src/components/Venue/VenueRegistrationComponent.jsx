@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import userContext from "../../contexts/userContext";
 import headerContext from "../../contexts/headerContext";
@@ -8,6 +8,11 @@ export const VenueRegistrationComponent = () => {
   const navigate = useNavigate()
   const userC = useContext(userContext)
   const headerC = useContext(headerContext)
+
+  useEffect(()=>{
+    if (headerC.state.userType !== "dealer")
+    navigate("/dealerLogin")
+  },[])
 
   function goToViewVenueStatus(event) {
     event.preventDefault()

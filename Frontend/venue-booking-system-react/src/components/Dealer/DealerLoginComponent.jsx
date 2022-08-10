@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import headerContext from '../../contexts/headerContext'
 import userContext from '../../contexts/userContext'
@@ -7,9 +7,19 @@ import DealerService from '../../Services/DealerService'
 
 export const DealerLoginComponent = () => {
 
-  const navigate = useNavigate(headerContext)
+  const navigate = useNavigate()
   const userC = useContext(userContext)
   const headerC = useContext(headerContext)
+
+  useEffect(()=>{
+    if (headerC.state.userType === "admin")
+    navigate("/viewUser")
+    else if (headerC.state.userType === "customer")
+    navigate("/searchVenue")
+    else if (headerC.state.userType === "dealer")
+    navigate("/viewVenueStatus")
+    headerC.updateDisplayAttribute("block")
+  },[])
 
   function goToDealerRegistration() {
     navigate("/dealerRegistration")
@@ -27,7 +37,7 @@ export const DealerLoginComponent = () => {
 
    
     response = await DealerService.getToken(credentials)
-    console.log("JWT token --> ", response);
+    // console.log("JWT token --> ", response);
     headerC.updateJwtToken(response.data)
 
     // console.log("header context jwtToken --> ", headerC.state.jwtToken);
@@ -35,7 +45,7 @@ export const DealerLoginComponent = () => {
       dealer = await DealerService.getDealerData(response.data)
       // console.log("dealer --> ", dealer.data);
 
-      console.log("Reached Here!!!");
+      // console.log("Reached Here!!!");
 
       userC.updateUser(
         dealer.data.dealerId,
