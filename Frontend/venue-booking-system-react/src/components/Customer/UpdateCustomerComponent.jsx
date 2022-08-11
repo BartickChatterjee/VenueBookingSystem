@@ -119,7 +119,7 @@ export const UpdateCustomerComponent = () => {
                   id="customer-update-balance"
                   className="dealer-login-input-field"
                   placeholder="Amount"
-                  min="0"
+                  min={userC.state.balance}
                   defaultValue={userC.state.balance}
                 ></input>
               </div>

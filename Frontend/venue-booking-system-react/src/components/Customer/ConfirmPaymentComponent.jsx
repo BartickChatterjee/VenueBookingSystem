@@ -53,7 +53,7 @@ function ConfirmPaymentComponent() {
       navigate("/searchVenue")
     }
     else {
-      alert("Insufficient Funds! Payment Failed")
+      alert("Payment Failed")
     }
   }
 

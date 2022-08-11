@@ -93,7 +93,7 @@ function RequestPaymentComponent() {
             <div className='dealer-registration-input-row'>
               <div>
                 <span className="dealer-login-span-input">Amount</span>
-                <input type="number" id="request-payment-amount" className="dealer-login-input-field" required></input>
+                <input type="number" id="request-payment-amount" className="dealer-login-input-field" min="0" required></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">

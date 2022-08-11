@@ -14,9 +14,15 @@ function BookVenueComponent(props) {
   const userC = useContext(userContext)
 
   useEffect(()=>{
+    document.getElementById("book-venue-from").min = new Date().toISOString().split("T")[0];
+    document.getElementById("book-venue-to").min = new Date().toISOString().split("T")[0];
     if (headerC.state.userType !== "customer")
     navigate("/customerLogin")
   },[])
+
+  function setMinDateTo(event){
+    document.getElementById("book-venue-to").min = document.getElementById("book-venue-from").value;
+  }
 
   async function raiseBookingRequest(event) {
     event.preventDefault()
@@ -67,7 +73,7 @@ function BookVenueComponent(props) {
               </div>
               <div>
                 <span className="dealer-login-span-input">Book from</span>
-                <input type="date" id="book-venue-from" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} required></input>
+                <input type="date" id="book-venue-from" className="dealer-login-input-field" style={{ paddingRight: "1vw" }} onChange={setMinDateTo} required></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">Book to</span>

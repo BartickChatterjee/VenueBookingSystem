@@ -893,6 +893,10 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+input[type=date]:invalid::-webkit-datetime-edit {
+  color: white;
+}
+
 /*---------------- Custom row highlighter --------------*/
 tbody>tr:nth-child(n) {
   transition: border-left 0.1s ease-in-out, font-size 0.1s ease-in-out;
