@@ -9,7 +9,9 @@ export const DealerRegistrationComponent = () => {
     const headerC = useContext(headerContext)
 
     useEffect(()=>{
-        document.getElementById("dealer-registration-dob").max = new Date().toISOString().split("T")[0];
+        var date = new Date();
+        date.setFullYear( date.getFullYear() - 18 );
+        document.getElementById("dealer-registration-dob").max = date.toISOString().split("T")[0]
         headerC.updateDisplayAttribute("block")
     },[])
 

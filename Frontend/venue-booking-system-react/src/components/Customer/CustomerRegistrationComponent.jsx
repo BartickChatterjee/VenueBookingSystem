@@ -9,7 +9,9 @@ export const CustomerRegistrationComponent = () => {
     const headerC = useContext(headerContext)
 
     useEffect(()=>{
-        document.getElementById("customer-registration-dob").max = new Date().toISOString().split("T")[0];
+        var date = new Date();
+        date.setFullYear( date.getFullYear() - 15 );
+        document.getElementById("customer-registration-dob").max = date.toISOString().split("T")[0]
         headerC.updateDisplayAttribute("block")
     },[])
 

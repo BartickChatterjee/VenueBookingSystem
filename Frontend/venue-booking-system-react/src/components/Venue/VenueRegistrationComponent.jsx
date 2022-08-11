@@ -64,7 +64,7 @@ export const VenueRegistrationComponent = () => {
 
               <div>
                 <span className="dealer-login-span-input">Capacity</span>
-                <input type="number" id="venue-registration-venue-capacity" className="dealer-login-input-field" placeholder="Enter capacity in numbers" required></input>
+                <input type="number" id="venue-registration-venue-capacity" className="dealer-login-input-field" min="10" placeholder="Enter capacity in numbers" required></input>
               </div>
 
             </div>
