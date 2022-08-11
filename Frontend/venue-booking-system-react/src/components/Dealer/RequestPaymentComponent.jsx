@@ -16,6 +16,7 @@ function RequestPaymentComponent() {
   useEffect(()=>{
     if (headerC.state.userType !== "dealer")
     navigate("/dealerLogin")
+    // console.log("Name   ", (location && location.state && location.state.booking && location.state.booking.customerFirstName) + " " + (location && location.state && location.state.booking && location.state.booking.customerLastName));
   },[])
 
   async function acceptBookingRequest(event) {
@@ -79,7 +80,7 @@ function RequestPaymentComponent() {
             <div className='dealer-registration-input-row'>
               <div>
                 <span className="dealer-login-span-input">Customer Name</span>
-                <input type="text" id="dealer-registration-firstname" className="dealer-login-input-field" value={ location && location.state && location.state.booking && location.state.booking.customerFirstName + " " + location && location.state && location.state.booking && location.state.booking.customerLastName} readOnly></input>
+                <input type="text" id="dealer-registration-firstname" className="dealer-login-input-field" value={ (location && location.state && location.state.booking && location.state.booking.customerFirstName) + " " + (location && location.state && location.state.booking && location.state.booking.customerLastName)} readOnly></input>
               </div>
               <div>
                 <span className="dealer-login-span-input">Requested from</span>
@@ -107,7 +108,7 @@ function RequestPaymentComponent() {
               </div>
             </div>
             <div className="dealer-registration-input-row">
-              <button className='btn btn-outline-light btn-lg dealer-login-button' style={{ display: location && location.state && location.state.booking && location.state.booking.bookingStatus == "Venue Requested"? "inline-block" : "None"}}>Accept &amp; Request Payment</button>
+              <button className='btn btn-outline-light btn-lg dealer-login-button' style={{ display: location && location.state && location.state.booking && location.state.booking.bookingStatus == "Raised"? "inline-block" : "None"}}>Accept &amp; Request Payment</button>
               <button className='btn btn-outline-light btn-lg dealer-login-button' onClick={declineBookingRequest}>Decline</button>
             </div>
           </div>

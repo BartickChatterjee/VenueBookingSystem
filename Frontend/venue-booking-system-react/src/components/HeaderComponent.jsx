@@ -50,7 +50,7 @@ export const HeaderComponent = () => {
       response = await CustomerService.getCustomerData(headerC.state.jwtToken)
     }
 
-    console.log("when refreshing balance      ",response);
+    // console.log("when refreshing balance      ",response);
 
     userC.updateUser(
       userC.state.userId,
