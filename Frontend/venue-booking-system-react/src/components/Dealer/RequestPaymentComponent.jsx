@@ -41,11 +41,11 @@ function RequestPaymentComponent() {
       "dealerLastName": userC.state.lastName
     }
 
-    console.log("new request payment in req pay     ",newPaymentRequest);
+    // console.log("new request payment in req pay     ",newPaymentRequest);
 
     var response = await VenueService.savePaymentRequest(headerC.state.jwtToken, userC.state.userId, newPaymentRequest)
 
-    console.log("Response in req pay     ",response);
+    // console.log("Response in req pay     ",response);
 
     if (response != "") {
       alert("Payment Requested Successfully!")
@@ -107,7 +107,7 @@ function RequestPaymentComponent() {
               </div>
             </div>
             <div className="dealer-registration-input-row">
-              <button className='btn btn-outline-light btn-lg dealer-login-button' style={{ display: location && location.state && location.state.booking && location.state.booking.bookingStatus == "Raised"? "inline-block" : "None"}}>Accept &amp; Request Payment</button>
+              <button className='btn btn-outline-light btn-lg dealer-login-button' style={{ display: location && location.state && location.state.booking && location.state.booking.bookingStatus == "Venue Requested"? "inline-block" : "None"}}>Accept &amp; Request Payment</button>
               <button className='btn btn-outline-light btn-lg dealer-login-button' onClick={declineBookingRequest}>Decline</button>
             </div>
           </div>

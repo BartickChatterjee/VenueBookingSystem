@@ -42,10 +42,10 @@ function ManageVenueRequestsComponent() {
         if (item.bookingStatus == "Booked" )
           bd.push(item)
         else{
-          // if (item.bookingStatus == "Raised" )
-          // item.bookingStatus = "Venue Requested"
-          // else if (item.bookingStatus == "Accepted" )
-          // item.bookingStatus = "Payment Requested" 
+          if (item.bookingStatus == "Raised" )
+          item.bookingStatus = "Venue Requested"
+          else if (item.bookingStatus == "Accepted" )
+          item.bookingStatus = "Payment Requested" 
           rd.push(item)
         }
       })
